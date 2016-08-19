@@ -10,7 +10,10 @@ import {
   StyleSheet,
   Text,
   View,
-  TextInput
+  TextInput,
+  TouchableOpacity,
+  Image
+  
 } from 'react-native';
 
 class FirstRNApp extends Component {
@@ -18,38 +21,87 @@ class FirstRNApp extends Component {
     super(props)
     this.state = {
       /*預設值*/
-      text: '123'
+      text: '',
+      height: '',
+      weight: '',
+      result: '',
+      pokedex:''
     }
   }
   
-  onPress = () => {
+  
+  onPress =  () => {
     console.log("pressed");
+  }
+  
+  calc = (result,value) =>{
+     value = this.state.height / 100;
+     result = this.state.weight / (value * value);
+     this.setState({result})
   }
   
   render() {
     return (
       <View style={styles.container}>
+      
+      <Text style = {styles.welocme}> Under Texts Are Input </Text>
       <TextInput
-        style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+        style={{height: 40, borderColor: 'gray', borderWidth: 2}}
         onChangeText={(text) => this.setState({text})}
         value={this.state.text}
       />
+      
+      <TouchableOpacity onPress = {this.onPress}>
+        <Text>Button</Text>
+      </TouchableOpacity>
      
       <Text style={styles.welcome}>{this.state.text}</Text>
-      
-        <Text style={styles.welcome} onPress = { this.onPress }  >
-          Welcome to React Native!
+    
+        
+        <Text style = {styles.welcome} >
+          請輸入BMI
         </Text>
-        <Text style={styles.instructions}>
-          Test!!!!!!!!!!!!!!!! 
-        </Text>        
-        <Text style={styles.instructions}>
-          To get started, edit index.android.js
+        <Text style = {styles.welcome} >
+          身高(CM)
         </Text>
-        <Text style={styles.instructions}>
-          Double tap R on your keyboard to reload,{'\n'}
-          Shake or press menu button for dev menu
+        <TextInput
+          style={{height: 40, borderColor: 'gray', borderWidth: 2}}
+
+          onChangeText={(height) => this.setState({height})}
+          value={this.state.height}
+        />
+        <Text style = {styles.welcome} >
+          體重(KG)
         </Text>
+        <TextInput
+          style={{height: 40, borderColor: 'gray', borderWidth: 2}}
+          onChangeText={(weight) => this.setState({weight})}
+          value={this.state.weight}
+        />
+        
+        <TouchableOpacity onPress = {this.calc} >
+          <Text>Button</Text>
+        </TouchableOpacity>        
+        
+        <Text>{this.state.result}</Text>
+        
+       <Image
+          style={{width: 87,height: 87}}
+          source={{uri: 'http://facebook.github.io/react/img/logo_og.png'}}
+        />        
+        
+        <Text>神奇寶貝輸入</Text>
+        <TextInput
+          style={{height: 40, borderColor: 'gray', borderWidth: 2}}
+          onChangeText={(pokedex) => this.setState({pokedex})}
+          value={this.state.pokedex}
+        />     
+        <Image
+          style={{width: 87,height: 87}}
+          source={{uri: `https://pokeadvisor.com/img/mon/${this.state.pokedex}.png`}}
+        /> 
+        
+        
       </View>
     );
   }
