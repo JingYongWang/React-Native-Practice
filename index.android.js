@@ -9,16 +9,40 @@ import {
   AppRegistry,
   StyleSheet,
   Text,
-  View
+  View,
+  TextInput
 } from 'react-native';
 
 class FirstRNApp extends Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      /*預設值*/
+      text: '123'
+    }
+  }
+  
+  onPress = () => {
+    console.log("pressed");
+  }
+  
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
+      <TextInput
+        style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+        onChangeText={(text) => this.setState({text})}
+        value={this.state.text}
+      />
+     
+      <Text style={styles.welcome}>{this.state.text}</Text>
+      
+        <Text style={styles.welcome} onPress = { this.onPress }  >
           Welcome to React Native!
         </Text>
+        <Text style={styles.instructions}>
+          Test!!!!!!!!!!!!!!!! 
+        </Text>        
         <Text style={styles.instructions}>
           To get started, edit index.android.js
         </Text>
