@@ -25,10 +25,15 @@ class FirstRNApp extends Component {
       height: '',
       weight: '',
       result: '',
-      pokedex:''
+      pokedex:'',
+      blcolor: false
     }
   }
   
+  changColor = (color) =>{
+    color = !this.state.blcolor
+    this.setState({blcolor:color})
+  }
   
   onPress =  () => {
     console.log("pressed");
@@ -101,6 +106,11 @@ class FirstRNApp extends Component {
           source={{uri: `https://pokeadvisor.com/img/mon/${this.state.pokedex}.png`}}
         /> 
         
+        {/*True & false*/}
+        <TouchableOpacity onPress = {this.changColor} style ={[styles.blue,this.state.blcolor && styles.red]} >
+          <Text>Red Button</Text>
+        </TouchableOpacity>
+        
         
       </View>
     );
@@ -124,6 +134,13 @@ const styles = StyleSheet.create({
     color: '#333333',
     marginBottom: 5,
   },
+  blue: {
+    backgroundColor: '#0000FF',
+  },
+  red:  {
+    backgroundColor: '#FF0000',
+  },
+  
 });
 
 AppRegistry.registerComponent('FirstRNApp', () => FirstRNApp);
